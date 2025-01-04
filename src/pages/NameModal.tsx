@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useState } from "react";
 
 interface NameModalProps {
   onClose: () => void;
@@ -7,33 +6,13 @@ interface NameModalProps {
 }
 
 const NameModal = ({ onClose, onNext }: NameModalProps) => {
-  const [code, setCode] = useState("");
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCode(e.target.value);
-  };
-
-  const handleSubmit = () => {
-    if (code.trim() === "") {
-      alert("코드를 입력해주세요!");
-      return;
-    }
-    onNext();
-  };
-
   return (
     <Overlay>
       <Modal>
         <CloseButton onClick={onClose}>&times;</CloseButton>
         <Title>가족 코드를 입력하세요.</Title>
-        <Input
-          placeholder="가족 코드를 입력해주세요."
-          value={code}
-          onChange={handleInputChange}
-        />
-        <SubmitButton onClick={handleSubmit} disabled={code.trim() === ""}>
-          다음
-        </SubmitButton>
+        <Input placeholder="가족 코드를 입력해주세요." />
+        <SubmitButton onClick={onNext}>다음</SubmitButton>
       </Modal>
     </Overlay>
   );
@@ -52,11 +31,10 @@ const Overlay = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  font-family: "Nanum DdoBagDdoBag", sans-serif;
 `;
 
 const Modal = styled.div`
-  width: 90%;
+  width: 70%;
   max-width: 400px;
   background: #ffffff;
   border-radius: 8px;
@@ -64,11 +42,6 @@ const Modal = styled.div`
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   position: relative;
   text-align: center;
-
-  @media (max-width: 768px) {
-    width: 95%;
-    padding: 15px;
-  }
 `;
 
 const CloseButton = styled.span`
@@ -92,37 +65,26 @@ const Title = styled.h2`
 `;
 
 const Input = styled.input`
-  width: 100%;
+  width: 90%;
   padding: 10px;
   margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 20px;
   outline: none;
-  font-family: "Nanum DdoBagDdoBag", sans-serif;
-
-  &:focus {
-    border-color: #99cdf0;
-    box-shadow: 0 0 5px rgba(153, 205, 240, 0.5);
-  }
+  font-family: "Nanum DdoBagDdoBag";
 `;
 
 const SubmitButton = styled.button`
-  width: 100%;
-  padding: 12px 0;
+  width: 30%;
+  padding: 7px 0;
   background-color: #99cdf0;
   border: none;
   border-radius: 4px;
   font-size: 18px;
   cursor: pointer;
-  color: white;
 
   &:hover {
     background-color: #7fbce0;
-  }
-
-  &:disabled {
-    background-color: #d3e5f2;
-    cursor: not-allowed;
   }
 `;
