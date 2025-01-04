@@ -1,8 +1,20 @@
+import { useState } from "react";
 import * as S from "./style";
 import Header from "../../components/Header";
 import Otter1 from "../../assets/Otter1";
+import NameModal from "../NameModal";
 
 const ConntextFamily = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <S.Layout>
       <Header type="logo" />
@@ -22,8 +34,11 @@ const ConntextFamily = () => {
           <span>or</span>
           <S.Line />
         </S.OrContainer>
-        <S.ConnectBtn>가족 코드로 연결하기</S.ConnectBtn>
+        <S.ConnectBtn onClick={handleOpenModal}>
+          가족 코드로 연결하기
+        </S.ConnectBtn>
       </S.Main>
+      {isModalOpen && <NameModal onClose={handleCloseModal} />}
     </S.Layout>
   );
 };
