@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as S from "./style";
 import Header from "../../components/Header";
 import Otter1 from "../../assets/Otter1";
@@ -6,6 +7,7 @@ import NameModal from "../NameModal";
 
 const ConntextFamily = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -13,6 +15,11 @@ const ConntextFamily = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleNextPage = () => {
+    setIsModalOpen(false);
+    navigate("/write-name");
   };
 
   return (
@@ -38,7 +45,9 @@ const ConntextFamily = () => {
           가족 코드로 연결하기
         </S.ConnectBtn>
       </S.Main>
-      {isModalOpen && <NameModal onClose={handleCloseModal} />}
+      {isModalOpen && (
+        <NameModal onClose={handleCloseModal} onNext={handleNextPage} />
+      )}
     </S.Layout>
   );
 };

@@ -1,7 +1,16 @@
-import Landing from "./pages/Landing";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import WriteName from "./pages/WriteName";
+import ConntextFamily from "./pages/ConnectFamily";
 
-function App() {
-  return <Landing />;
-}
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<ConntextFamily />} />
+        <Route path="/write-name" element={<WriteName />} />
+      </Routes>
+    </Router>
+  );
+};
 
 export default App;
