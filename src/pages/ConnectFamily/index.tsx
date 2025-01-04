@@ -17,8 +17,7 @@ const ConntextFamily = () => {
     setIsModalOpen(false);
   };
 
-  const handleNextPage = () => {
-    setIsModalOpen(false);
+  const handleNext = () => {
     navigate("/write-name");
   };
 
@@ -46,7 +45,7 @@ const ConntextFamily = () => {
         </S.ConnectBtn>
       </S.Main>
       {isModalOpen && (
-        <NameModal onClose={handleCloseModal} onNext={handleNextPage} />
+        <NameModal onClose={handleCloseModal} onNext={handleNext} />
       )}
     </S.Layout>
   );

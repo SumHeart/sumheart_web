@@ -2,14 +2,14 @@ import Otter1 from "../../assets/Otter1";
 import * as S from "./style";
 import Heart from "../../assets/heart.svg";
 
-const Main = () => {
+const Main = ({ userName }: { userName: string }) => {
   return (
     <S.Layout>
       <S.Header>
         <S.HighContainer>
           <S.Diamond>💎 250</S.Diamond>
           <S.FamilyInfo>
-            <div>시연 🩷 윤서 🩷 민지 🩷 영훈 가족</div>
+            <div>시연 🩷 윤서 🩷 민지 🩷 {userName} 가족</div>
             <div>
               가족이 된 지 <S.Days>0일</S.Days>째
             </div>
