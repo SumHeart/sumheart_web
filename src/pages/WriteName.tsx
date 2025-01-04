@@ -23,7 +23,6 @@ const Layout = styled.main`
   background-image: url(${BackGroundImg});
 `;
 
-// 스타일 컴포넌트 정의
 const Container = styled.div`
   display: flex;
   flex-direction: column;
