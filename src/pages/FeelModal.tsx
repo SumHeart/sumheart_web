@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import styled from "styled-components";
 import Clude from "../assets/clude.png";
 import Clude1 from "../assets/clude1.png";
@@ -51,12 +52,18 @@ const ImgWrapper = styled.div`
   align-items: center;
 `;
 
-const Img = styled.img`
+interface ImgProps {
+  selected: boolean;
+}
+
+const Img = styled.img<ImgProps>`
   width: 90px;
   height: 90px;
   object-fit: contain;
   cursor: pointer;
   transition: transform 0.2s;
+  border: ${(props) => (props.selected ? "3px solid #ffffff" : "none")};
+  border-radius: 10px;
 
   &:hover {
     transform: scale(1.1);
@@ -86,8 +93,14 @@ const OkBtn = styled(Button)`
   background-color: #cbe6f8;
 `;
 
-const FeelModal = () => {
-  const images = [
+interface FeelModalProps {
+  onClose: () => void;
+}
+
+const FeelModal = ({ onClose }: FeelModalProps) => {
+  const [selectedMood, setSelectedMood] = useState<number | null>(null);
+
+  const images: string[] = [
     Clude,
     Clude1,
     Clude2,
@@ -99,6 +112,19 @@ const FeelModal = () => {
     Sun1,
   ];
 
+  const handleMoodSelect = (index: number): void => {
+    setSelectedMood(index);
+  };
+
+  const handleConfirm = (): void => {
+    if (selectedMood !== null) {
+      console.log("Selected mood:", selectedMood);
+      onClose();
+    } else {
+      alert("기분을 선택해주세요.");
+    }
+  };
+
   return (
     <Overlay>
       <Modal>
@@ -106,13 +132,18 @@ const FeelModal = () => {
         <ImgContainer>
           {images.map((img, index) => (
             <ImgWrapper key={index}>
-              <Img src={img} alt={`Mood ${index + 1}`} />
+              <Img
+                src={img}
+                alt={`Mood ${index + 1}`}
+                onClick={() => handleMoodSelect(index)}
+                selected={selectedMood === index}
+              />
             </ImgWrapper>
           ))}
         </ImgContainer>
         <ButtonContainer>
-          <BackBtn>취소</BackBtn>
-          <OkBtn>확인</OkBtn>
+          <BackBtn onClick={onClose}>취소</BackBtn>
+          <OkBtn onClick={handleConfirm}>확인</OkBtn>
         </ButtonContainer>
       </Modal>
     </Overlay>

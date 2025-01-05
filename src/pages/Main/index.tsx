@@ -1,8 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import Otter1 from "../../assets/Otter1";
 import * as S from "./style";
 import Heart from "../../assets/heart.svg";
 
 const Main = ({ userName }: { userName: string }) => {
+  const navigate = useNavigate();
+
+  const handleQuestionClick = () => {
+    navigate("/question-detail");
+  };
+
   return (
     <S.Layout>
       <S.Header>
@@ -21,7 +28,7 @@ const Main = ({ userName }: { userName: string }) => {
           <img src={Heart} alt="Heart" />
         </S.ImgContainer>
         <Otter1 width={117} />
-        <S.QuestionContainer>
+        <S.QuestionContainer onClick={handleQuestionClick}>
           <S.Question>서로의 첫 만남은 어땠나요?</S.Question>
         </S.QuestionContainer>
       </S.Content>

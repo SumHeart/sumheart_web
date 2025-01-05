@@ -1,5 +1,7 @@
 import * as S from "./style";
 import Header from "../../components/Header";
+import { useState } from "react";
+import FeelModal from "../FeelModal";
 
 const MembersDetail = [
   {
@@ -29,6 +31,16 @@ const MembersDetail = [
 ];
 
 const QuestionDetail = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleAnswerClick = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <S.Layout>
       <Header type="logo" withClose />
@@ -44,7 +56,7 @@ const QuestionDetail = () => {
             <S.AnswerContainer key={detail.id}>
               <S.Name>{detail.name}</S.Name>
               {detail.id === 1 ? (
-                <S.Answer>{detail.answer}</S.Answer>
+                <S.Answer onClick={handleAnswerClick}>{detail.answer}</S.Answer>
               ) : (
                 <S.CenteredAnswer>
                   상대방의 답변이 궁금하다면
@@ -56,6 +68,7 @@ const QuestionDetail = () => {
           ))}
         </S.QuestionContainer>
       </S.Main>
+      {showModal && <FeelModal onClose={handleCloseModal} />}
     </S.Layout>
   );
 };
