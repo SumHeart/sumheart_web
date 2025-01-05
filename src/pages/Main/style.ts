@@ -28,7 +28,7 @@ export const HighContainer = styled.div`
 `;
 
 export const Diamond = styled.span`
-  font-size: 20px;
+  font-size: 25px;
   display: flex;
   align-items: center;
 `;
@@ -41,7 +41,7 @@ export const FamilyInfo = styled.div`
 
 export const Days = styled.span`
   font-weight: bold;
-  font-size: 16px;
+  font-size: 30px;
 `;
 
 export const Content = styled.div`
