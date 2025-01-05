@@ -2,6 +2,7 @@ import * as S from "./style";
 import Header from "../../components/Header";
 import { useState } from "react";
 import FeelModal from "../FeelModal";
+import { useNavigate } from "react-router-dom";
 
 const MembersDetail = [
   {
@@ -32,6 +33,7 @@ const MembersDetail = [
 
 const QuestionDetail = () => {
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const handleAnswerClick = () => {
     setShowModal(true);
@@ -39,6 +41,11 @@ const QuestionDetail = () => {
 
   const handleCloseModal = () => {
     setShowModal(false);
+  };
+
+  const handleConfirm = () => {
+    // 여기서 선택된 기분을 처리할 수 있습니다 (예: API 호출 등)
+    navigate("/question-answer");
   };
 
   return (
@@ -68,7 +75,9 @@ const QuestionDetail = () => {
           ))}
         </S.QuestionContainer>
       </S.Main>
-      {showModal && <FeelModal onClose={handleCloseModal} />}
+      {showModal && (
+        <FeelModal onClose={handleCloseModal} onConfirm={handleConfirm} />
+      )}
     </S.Layout>
   );
 };

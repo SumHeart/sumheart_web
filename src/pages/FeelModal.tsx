@@ -95,10 +95,23 @@ const OkBtn = styled(Button)`
 
 interface FeelModalProps {
   onClose: () => void;
+  onConfirm: (selectedMood: number) => void;
 }
 
-const FeelModal = ({ onClose }: FeelModalProps) => {
+const FeelModal = ({ onClose, onConfirm }: FeelModalProps) => {
   const [selectedMood, setSelectedMood] = useState<number | null>(null);
+
+  const handleMoodSelect = (index: number): void => {
+    setSelectedMood(index);
+  };
+
+  const handleConfirm = (): void => {
+    if (selectedMood !== null) {
+      onConfirm(selectedMood);
+    } else {
+      alert("기분을 선택해주세요.");
+    }
+  };
 
   const images: string[] = [
     Clude,
@@ -111,19 +124,6 @@ const FeelModal = ({ onClose }: FeelModalProps) => {
     Sun,
     Sun1,
   ];
-
-  const handleMoodSelect = (index: number): void => {
-    setSelectedMood(index);
-  };
-
-  const handleConfirm = (): void => {
-    if (selectedMood !== null) {
-      console.log("Selected mood:", selectedMood);
-      onClose();
-    } else {
-      alert("기분을 선택해주세요.");
-    }
-  };
 
   return (
     <Overlay>
