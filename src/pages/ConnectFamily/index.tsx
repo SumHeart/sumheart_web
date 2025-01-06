@@ -8,6 +8,7 @@ import NameModal from "../NameModal";
 const ConntextFamily = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const inviteCode = "DDDDDD";
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -21,6 +22,12 @@ const ConntextFamily = () => {
     navigate("/write-name");
   };
 
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(inviteCode).then(() => {
+      alert("코드가 클립보드에 복사되었습니다.");
+    });
+  };
+
   return (
     <S.Layout>
       <Header type="logo" />
@@ -32,7 +39,7 @@ const ConntextFamily = () => {
         <Otter1 width={100} />
         <S.CodeTextContainer>
           <span>나의 코드 복사</span>
-          <S.MyCode>ABCSWFS</S.MyCode>
+          <S.MyCode onClick={copyToClipboard}>{inviteCode}</S.MyCode>
         </S.CodeTextContainer>
         <S.ShareBtn>초대장 보내기</S.ShareBtn>
         <S.OrContainer>
