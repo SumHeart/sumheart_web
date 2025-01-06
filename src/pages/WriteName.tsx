@@ -17,6 +17,8 @@ const WriteName = ({ setName }: { setName: (name: string) => void }) => {
       alert("이름을 입력해주세요!");
       return;
     }
+    // 이름을 로컬 스토리지에 저장합니다.
+    localStorage.setItem("userName", inputName);
     setName(inputName);
     navigate("/main");
   };
