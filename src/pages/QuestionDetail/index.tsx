@@ -45,7 +45,7 @@ const QuestionDetail = () => {
 
   const handleConfirm = () => {
     // 여기서 선택된 기분을 처리할 수 있습니다 (예: API 호출 등)
-    navigate("/question-answer");
+    navigate("/answer");
   };
 
   return (

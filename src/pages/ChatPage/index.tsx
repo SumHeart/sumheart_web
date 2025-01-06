@@ -3,13 +3,19 @@ import * as S from "./style";
 import Header from "../../components/Header";
 import Arrow from "../../assets/arrow.png";
 import Send from "../../assets/send.png";
+import { useNavigate } from "react-router-dom";
 
 interface Comment {
   author: string;
   text: string;
 }
 
-const ChatPage: React.FC = () => {
+const ChatPage = () => {
+  const navigate = useNavigate();
+
+  const handleChatClick = () => {
+    navigate("/main");
+  };
   const [inputValue, setInputValue] = useState<string>("");
   const [comments, setComments] = useState<Comment[]>([]);
 
@@ -29,7 +35,7 @@ const ChatPage: React.FC = () => {
       <Header type="logo" />
       <S.Main>
         <S.HeaderContainer>
-          <S.Img src={Arrow} alt="Arrow" />
+          <S.Img src={Arrow} alt="Arrow" onClick={handleChatClick} />
           <S.TextContainer>
             <span>#1번째 질문</span>
             <span>서로의 첫 만남은 어땠나요?</span>

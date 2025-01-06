@@ -6,6 +6,7 @@ import Clude1 from "../assets/clude1.png";
 import Clude2 from "../assets/clude2.png";
 import Clude3 from "../assets/clude3.png";
 import Chat from "../assets/chat.png";
+import { useNavigate } from "react-router-dom";
 
 const Layout = styled.main`
   position: relative;
@@ -17,7 +18,8 @@ const Layout = styled.main`
 
 const Icon = styled.div`
   position: absolute;
-  bottom: 10;
+  bottom: 0;
+  right: 0;
 `;
 
 const ImageContainer = styled.div`
@@ -115,6 +117,11 @@ const MembersDetail = [
 ];
 
 const AnswerPage = () => {
+  const navigate = useNavigate();
+
+  const handleChatClick = () => {
+    navigate("/chat");
+  };
   return (
     <Layout>
       <Header type="logo" withClose />
@@ -140,8 +147,8 @@ const AnswerPage = () => {
           ))}
         </QuestionContainer>
       </Main>
-      <Icon>
-        <Chat />
+      <Icon onClick={handleChatClick}>
+        <img src={Chat} />
       </Icon>
     </Layout>
   );

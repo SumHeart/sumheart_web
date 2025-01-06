@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import Clude from "../assets/clude.png";
 import Clude1 from "../assets/clude1.png";
