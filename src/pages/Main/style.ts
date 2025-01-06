@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import BackgroundImg from "../../assets/backgroundImg.png";
 
 export const Layout = styled.main`
@@ -11,6 +11,37 @@ export const Layout = styled.main`
   font-family: "Nanum DdoBagDdoBag", sans-serif;
   background-image: url(${BackgroundImg});
   padding-top: 60px;
+`;
+
+const shake = keyframes`
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(5deg); }
+  50% { transform: rotate(0eg); }
+  75% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+`;
+
+export const HeartImage = styled.img`
+  animation: ${shake} 0.5s ease-in-out infinite;
+`;
+
+const shakeAndPulse = keyframes`
+  0%, 100% { 
+    transform: rotate(0deg) scale(1); 
+  }
+  25% { 
+    transform: rotate(3deg) scale(1.05); 
+  }
+  50% { 
+    transform: rotate(-3deg) scale(0.95); 
+  }
+  75% { 
+    transform: rotate(3deg) scale(1.03); 
+  }
+`;
+
+export const AnimatedOtterContainer = styled.div`
+  animation: ${shakeAndPulse} 3s ease-in-out infinite;
 `;
 
 export const Header = styled.header`
