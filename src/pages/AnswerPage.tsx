@@ -1,3 +1,4 @@
+import React from "react";
 import Header from "../components/Header";
 import styled from "styled-components";
 import BackgroundImg from "../assets/backgroundImg.png";
@@ -47,18 +48,22 @@ const Title = styled.span`
   text-align: center;
   font-size: 24px;
 `;
+
 const QuestionContainer = styled.div`
   padding-top: 60px;
 `;
+
 const Question = styled.span`
   font-size: 30px;
 `;
+
 const TagContainer = styled.div`
   display: flex;
   gap: 20px;
   color: #8c8c8c;
   padding-bottom: 45px;
 `;
+
 const AnswerContainer = styled.div`
   padding-bottom: 20px;
   font-size: 22px;
@@ -74,40 +79,18 @@ const Answer = styled.div`
 
 export const CenteredAnswer = styled(Answer)`
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #3c3c3c;
-  position: relative;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    backdrop-filter: blur(5px);
-    z-index: -1;
-  }
 `;
 
 const MembersDetail = [
   {
-    id: 1,
+    id: 2,
     name: "시연",
     answer: "너무 별루였다. ㅋㅋ",
   },
   {
-    id: 2,
+    id: 3,
     name: "윤서",
     answer: "신기하게 생겼다고 생각햇다",
-  },
-  {
-    id: 3,
-    name: "영은",
-    answer: "그냥 그랫어요",
   },
   {
     id: 4,
@@ -122,23 +105,38 @@ const AnswerPage = () => {
   const handleChatClick = () => {
     navigate("/chat");
   };
+
+  const storedImage = localStorage.getItem("selectedMoodImage") || Clude1; // 기본값으로 Clude1 사용
+  const storedName = localStorage.getItem("userName") || "영은"; // 기본값으로 '영은' 사용
+  const storedAnswer = localStorage.getItem("userAnswer") || "답변이 없습니다."; // 기본값 설정
+
+  const today = new Date();
+  const formattedDate = `${today.getFullYear()}.${
+    today.getMonth() + 1
+  }.${today.getDate()}`;
+
   return (
     <Layout>
       <Header type="logo" withClose />
       <Main>
         <Title>우리 가족 일기</Title>
         <ImageContainer>
-          <MoodImage src={Clude} alt="Mood 1" />
-          <MoodImage src={Clude1} alt="Mood 2" />
-          <MoodImage src={Clude2} alt="Mood 3" />
-          <MoodImage src={Clude3} alt="Mood 4" />
+          <MoodImage src={storedImage} alt="Mood" />{" "}
+          {/* 로컬 스토리지에서 가져온 이미지 */}
+          <MoodImage src={Clude} alt="Mood" />
+          <MoodImage src={Clude2} alt="Mood" />
+          <MoodImage src={Clude3} alt="Mood" />
         </ImageContainer>
         <QuestionContainer>
           <Question>서로의 첫 만남은 어땠나요?</Question>
           <TagContainer>
             <span>#1번째 질문</span>
-            <span>2024.12.29</span>
+            <span>{formattedDate}</span>
           </TagContainer>
+          <AnswerContainer>
+            <Name>{storedName}</Name>
+            <Answer>{storedAnswer}</Answer>
+          </AnswerContainer>
           {MembersDetail.map((detail) => (
             <AnswerContainer key={detail.id}>
               <Name>{detail.name}</Name>
@@ -148,7 +146,7 @@ const AnswerPage = () => {
         </QuestionContainer>
       </Main>
       <Icon onClick={handleChatClick}>
-        <img src={Chat} />
+        <img src={Chat} alt="Chat" />
       </Icon>
     </Layout>
   );

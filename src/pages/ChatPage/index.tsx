@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "./style";
 import Header from "../../components/Header";
 import Arrow from "../../assets/arrow.png";
@@ -16,8 +16,16 @@ const ChatPage = () => {
   const handleChatClick = () => {
     navigate("/main");
   };
+
   const [inputValue, setInputValue] = useState<string>("");
   const [comments, setComments] = useState<Comment[]>([]);
+
+  useEffect(() => {
+    const storedComments = localStorage.getItem("chatComments");
+    if (storedComments) {
+      setComments(JSON.parse(storedComments));
+    }
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -25,8 +33,12 @@ const ChatPage = () => {
 
   const handleSendClick = () => {
     if (inputValue.trim() !== "") {
-      setComments([...comments, { author: "나", text: inputValue }]);
+      const newComment = { author: "나", text: inputValue };
+      const updatedComments = [...comments, newComment];
+      setComments(updatedComments);
       setInputValue("");
+
+      localStorage.setItem("chatComments", JSON.stringify(updatedComments));
     }
   };
 
@@ -41,10 +53,20 @@ const ChatPage = () => {
             <span>서로의 첫 만남은 어땠나요?</span>
           </S.TextContainer>
         </S.HeaderContainer>
+
         <S.OtherChatContainer>
           <span>윤서</span>
           <S.Chat>우리가 별로엿어??ㅠㅠ</S.Chat>
         </S.OtherChatContainer>
+        <S.OtherChatContainer>
+          <span>시연</span>
+          <S.Chat>쫌 그랫나봐...ㅠ 미안</S.Chat>
+        </S.OtherChatContainer>
+        <S.OtherChatContainer>
+          <span>시연</span>
+          <S.Chat>ㅋㅋㅋㅋㅋ</S.Chat>
+        </S.OtherChatContainer>
+
         {comments.map((comment, index) =>
           comment.author === "나" ? (
             <S.MyChatContainer key={index}>
@@ -58,7 +80,6 @@ const ChatPage = () => {
             </S.OtherChatContainer>
           ),
         )}
-
         <S.InputContainer>
           <S.Input
             placeholder="댓글달기..."

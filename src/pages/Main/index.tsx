@@ -8,10 +8,11 @@ const Main = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [diamonds, setDiamonds] = useState(250);
-
+  const [hasUserAnswer, setHasUserAnswer] = useState(false);
   useEffect(() => {
     const storedName = localStorage.getItem("userName");
     const storedDiamonds = localStorage.getItem("diamonds");
+    const userAnswer = localStorage.getItem("userAnswer");
 
     if (storedName) {
       setUserName(storedName);
@@ -22,6 +23,20 @@ const Main = () => {
     } else {
       localStorage.setItem("diamonds", diamonds.toString());
     }
+
+    if (userAnswer) {
+      setDiamonds((prevDiamonds) => prevDiamonds + 5);
+      localStorage.setItem("diamonds", (diamonds + 5).toString());
+      setHasUserAnswer(true);
+    }
+
+    const intervalId = setInterval(() => {
+      localStorage.removeItem("userAnswer");
+      localStorage.removeItem("diamonds");
+      setDiamonds(0);
+    }, 300000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   useEffect(() => {
@@ -29,7 +44,11 @@ const Main = () => {
   }, [diamonds]);
 
   const handleQuestionClick = () => {
-    navigate("/question-detail");
+    if (hasUserAnswer) {
+      navigate("/result");
+    } else {
+      navigate("/question-detail");
+    }
   };
 
   const handleListClick = () => {

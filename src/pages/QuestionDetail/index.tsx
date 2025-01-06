@@ -1,13 +1,12 @@
 import * as S from "./style";
 import Header from "../../components/Header";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FeelModal from "../FeelModal";
-import { useNavigate } from "react-router-dom";
 
 const MembersDetail = [
   {
     id: 1,
-    name: "시연",
+    name: "영은",
     answer: "이곳을 눌러 답변해 주세요.",
     realAnswer: "그냥 그랫어요",
   },
@@ -19,7 +18,7 @@ const MembersDetail = [
   },
   {
     id: 3,
-    name: "영은",
+    name: "시연",
     answer: "상대방의 답변이 궁금하다면 오늘 질문에 먼저 답변해 주세요.",
     realAnswer: "그냥 그랫어요",
   },
@@ -33,7 +32,15 @@ const MembersDetail = [
 
 const QuestionDetail = () => {
   const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate();
+  const [, setUserName] = useState("영은");
+
+  useEffect(() => {
+    const storedName = localStorage.getItem("userName");
+    if (storedName) {
+      setUserName(storedName);
+      MembersDetail[0].name = storedName;
+    }
+  }, []);
 
   const handleAnswerClick = () => {
     setShowModal(true);
@@ -43,10 +50,10 @@ const QuestionDetail = () => {
     setShowModal(false);
   };
 
-  const handleConfirm = () => {
-    // 여기서 선택된 기분을 처리할 수 있습니다 (예: API 호출 등)
-    navigate("/answer");
-  };
+  const today = new Date();
+  const formattedDate = `${today.getFullYear()}.${
+    today.getMonth() + 1
+  }.${today.getDate()}`;
 
   return (
     <S.Layout>
@@ -57,7 +64,7 @@ const QuestionDetail = () => {
           <S.Question>서로의 첫 만남은 어땠나요?</S.Question>
           <S.TagContainer>
             <span>#1번째 질문</span>
-            <span>2024.12.29</span>
+            <span>{formattedDate}</span>
           </S.TagContainer>
           {MembersDetail.map((detail) => (
             <S.AnswerContainer key={detail.id}>
@@ -75,9 +82,7 @@ const QuestionDetail = () => {
           ))}
         </S.QuestionContainer>
       </S.Main>
-      {showModal && (
-        <FeelModal onClose={handleCloseModal} onConfirm={handleConfirm} />
-      )}
+      {showModal && <FeelModal onClose={handleCloseModal} />}
     </S.Layout>
   );
 };

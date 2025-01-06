@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Clude from "../assets/clude.png";
 import Clude1 from "../assets/clude1.png";
@@ -10,6 +10,7 @@ import Moon from "../assets/moon.png";
 import Sun from "../assets/sun.png";
 import Sun1 from "../assets/sun1.png";
 import BackgroundImg from "../assets/backgroundImg.png";
+import { useNavigate } from "react-router-dom";
 
 const Overlay = styled.div`
   position: fixed;
@@ -95,11 +96,18 @@ const OkBtn = styled(Button)`
 
 interface FeelModalProps {
   onClose: () => void;
-  onConfirm: (selectedMood: number) => void;
 }
 
-const FeelModal = ({ onClose, onConfirm }: FeelModalProps) => {
+const FeelModal = ({ onClose }: FeelModalProps) => {
   const [selectedMood, setSelectedMood] = useState<number | null>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedMood = localStorage.getItem("selectedMood");
+    if (storedMood) {
+      setSelectedMood(parseInt(storedMood, 10));
+    }
+  }, []);
 
   const handleMoodSelect = (index: number): void => {
     setSelectedMood(index);
@@ -107,7 +115,9 @@ const FeelModal = ({ onClose, onConfirm }: FeelModalProps) => {
 
   const handleConfirm = (): void => {
     if (selectedMood !== null) {
-      onConfirm(selectedMood);
+      // 선택한 기분을 로컬 스토리지에 저장합니다.
+      localStorage.setItem("selectedMood", selectedMood.toString());
+      navigate("/answer");
     } else {
       alert("기분을 선택해주세요.");
     }
