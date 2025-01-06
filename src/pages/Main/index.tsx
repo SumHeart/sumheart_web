@@ -18,7 +18,7 @@ const Main = ({ userName }: { userName: string }) => {
           <S.FamilyInfo>
             <div>시연 🩷 윤서 🩷 민지 🩷 {userName} 가족</div>
             <div>
-              가족이 된 지 <S.Days>0</S.Days>일째
+              가족이 된 지 <S.Days>2800</S.Days>일째
             </div>
           </S.FamilyInfo>
         </S.HighContainer>
