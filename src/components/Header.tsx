@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const LogoWrapper = styled.div`
@@ -27,10 +28,16 @@ interface HeaderProps {
 }
 
 const Header = ({ type, withClose }: HeaderProps) => {
+  const navigate = useNavigate();
+  const handleConfirm = (): void => {
+    navigate("/main");
+  };
   return (
     <LogoWrapper>
       <Logo>{type === "logo" ? "SumHeart" : "List"}</Logo>
-      {type === "logo" && withClose && <CloseButton>x</CloseButton>}
+      {type === "logo" && withClose && (
+        <CloseButton onClick={handleConfirm}>x</CloseButton>
+      )}
     </LogoWrapper>
   );
 };
