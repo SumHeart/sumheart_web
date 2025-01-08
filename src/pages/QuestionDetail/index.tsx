@@ -12,19 +12,19 @@ const MembersDetail = [
   },
   {
     id: 2,
-    name: "윤서",
+    name: "철이",
     answer: "상대방의 답변이 궁금하다면 오늘 질문에 먼저 답변해 주세요.",
     realAnswer: "그냥 그랫어요",
   },
   {
     id: 3,
-    name: "시연",
+    name: "미애",
     answer: "상대방의 답변이 궁금하다면 오늘 질문에 먼저 답변해 주세요.",
     realAnswer: "그냥 그랫어요",
   },
   {
     id: 4,
-    name: "민지",
+    name: "아인",
     answer: "상대방의 답변이 궁금하다면 오늘 질문에 먼저 답변해 주세요.",
     realAnswer: "그냥 그랫어요",
   },

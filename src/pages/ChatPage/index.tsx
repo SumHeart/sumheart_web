@@ -55,15 +55,15 @@ const ChatPage = () => {
         </S.HeaderContainer>
 
         <S.OtherChatContainer>
-          <span>윤서</span>
-          <S.Chat>우리가 별로엿어??ㅠㅠ</S.Chat>
+          <span>미애</span>
+          <S.Chat>아인아... 기억이 안 난다니...</S.Chat>
         </S.OtherChatContainer>
         <S.OtherChatContainer>
-          <span>시연</span>
-          <S.Chat>쫌 그랫나봐...ㅠ 미안</S.Chat>
+          <span>아인</span>
+          <S.Chat>기억이 안 나는걸 어떠캐...</S.Chat>
         </S.OtherChatContainer>
         <S.OtherChatContainer>
-          <span>시연</span>
+          <span>철이</span>
           <S.Chat>ㅋㅋㅋㅋㅋ</S.Chat>
         </S.OtherChatContainer>
 

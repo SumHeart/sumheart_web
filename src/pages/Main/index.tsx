@@ -61,7 +61,7 @@ const Main = () => {
         <S.HighContainer>
           <S.Diamond>💎 {diamonds}</S.Diamond>
           <S.FamilyInfo onClick={handleListClick}>
-            <div>시연 🩷 윤서 🩷 민지 🩷 {userName} 가족</div>
+            <div>철이(아빠) 🩷 미애(엄마) 🩷 아인 🩷 {userName} 가족</div>
             <div>
               가족이 된 지 <S.Days>2800</S.Days>일째
             </div>

@@ -84,18 +84,18 @@ export const CenteredAnswer = styled(Answer)`
 const MembersDetail = [
   {
     id: 2,
-    name: "시연",
-    answer: "너무 별루였다. ㅋㅋ",
+    name: "철이",
+    answer: "미애와 처음 만났을땐 심장이 멎는줄 알았다. 아이들과 만났을때가 참 그립다",
   },
   {
     id: 3,
-    name: "윤서",
-    answer: "신기하게 생겼다고 생각햇다",
+    name: "미애",
+    answer: "우리 애기들과 처음 만났을때를 잊을 수 없지. 말로 표현할 수 없을만큼 좋았어.",
   },
   {
     id: 4,
-    name: "민지",
-    answer: "아 몰라 기억안남",
+    name: "아인",
+    answer: "기억이 안나는데...",
   },
 ];
 
