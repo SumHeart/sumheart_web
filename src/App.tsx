@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
-import WriteName from "./pages/WriteName";
+import WriteName from "./pages/Write";
 import Main from "./pages/Main";
 import ConntextFamily from "./pages/ConnectFamily";
 import QuestionDetail from "./pages/QuestionDetail";
@@ -10,13 +9,12 @@ import ChatPage from "./pages/ChatPage";
 import List from "./pages/List";
 
 const App = () => {
-  const [, setName] = useState("");
-
   return (
     <Router>
       <Routes>
         <Route path="/" element={<ConntextFamily />} />
-        <Route path="/write-name" element={<WriteName setName={setName} />} />
+        <Route path="/write-name" element={<WriteName type="name" />} />
+        <Route path="/write-petname" element={<WriteName type="petName" />} />
         <Route path="/main" element={<Main />} />
         <Route path="/question-detail" element={<QuestionDetail />} />
         <Route path="/answer" element={<AnswerModal />} />

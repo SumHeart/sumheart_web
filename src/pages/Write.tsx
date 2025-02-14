@@ -1,39 +1,60 @@
 import styled from "styled-components";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BackgroundImg from "../assets/backgroundImg.png";
 
-const WriteName = ({ setName }: { setName: (name: string) => void }) => {
-  const [inputName, setInputName] = useState("");
+interface Props {
+  type: "name" | "petName";
+}
+
+const WriteName = ({ type }: Props) => {
+  const [input, setInput] = useState("");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setInput("");
+  }, [type]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputName(e.target.value);
+    setInput(e.target.value);
   };
 
   const handleSubmit = () => {
-    if (inputName.trim() === "") {
-      alert("이름을 입력해주세요!");
+    if (input.trim() === "") {
+      alert(
+        type === "name"
+          ? "이름을 입력해주세요!"
+          : "반려몽의 이름을 입력해주세요!",
+      );
       return;
     }
-    // 이름을 로컬 스토리지에 저장합니다.
-    localStorage.setItem("userName", inputName);
-    setName(inputName);
-    navigate("/main");
+
+    if (type === "name") {
+      localStorage.setItem("userName", input);
+      navigate("/write-petname");
+    } else {
+      localStorage.setItem("petName", input);
+      navigate("/main");
+    }
   };
+
+  const title =
+    type === "name" ? "이름을 입력하세요" : "반려몽의 이름을 입력하세요";
+  const placeholder =
+    type === "name" ? "올바르게 입력해야합니다!" : "반려몽의 이름을 입력하세요";
 
   return (
     <Layout>
       <Header type="logo" />
       <Container>
-        <Title>이름을 입력하세요</Title>
+        <Title>{title}</Title>
         <Input
-          placeholder="올바르게 입력해야합니다!"
-          value={inputName}
+          placeholder={placeholder}
+          value={input}
           onChange={handleInputChange}
         />
-        <SubmitButton onClick={handleSubmit} disabled={inputName.trim() === ""}>
+        <SubmitButton onClick={handleSubmit} disabled={input.trim() === ""}>
           확인
         </SubmitButton>
       </Container>
