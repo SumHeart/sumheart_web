@@ -13,8 +13,6 @@ export const Img = styled.img`
   left: 0;
 `;
 
-export const Main = styled.div``;
-
 export const HeaderContainer = styled.div`
   display: flex;
   padding: 30px 17px;
