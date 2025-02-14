@@ -45,7 +45,7 @@ const ChatPage = () => {
   return (
     <S.Layout>
       <Header type="logo" />
-      <S.Main>
+      <div>
         <S.HeaderContainer>
           <S.Img src={Arrow} alt="Arrow" onClick={handleChatClick} />
           <S.TextContainer>
@@ -95,7 +95,7 @@ const ChatPage = () => {
             alt="Send"
           />
         </S.InputContainer>
-      </S.Main>
+      </div>
     </S.Layout>
   );
 };

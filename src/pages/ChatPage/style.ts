@@ -5,7 +5,6 @@ export const Layout = styled.main`
   background-image: url(${BackgroundImg});
   width: 100vw;
   height: 100vh;
-
   font-family: "Nanum DdoBagDdoBag";
 `;
 
